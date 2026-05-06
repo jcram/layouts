@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Concreto · Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* =========================================================
+     CONCRETO · DESIGN SYSTEM
+     Fundamentos extraídos da plataforma de FIDC
+     ========================================================= */
+  :root {
+    /* Color · Brand */
+    --concreto-midnight:   #0B1B33;
+    --concreto-navy:       #11254A;
+    --concreto-navy-700:   #1A3266;
+    --concreto-navy-500:   #2D4A85;
+    --concreto-ink:        #0F172A;
+
+    /* Color · Neutrals */
+    --concreto-white:      #FFFFFF;
+    --concreto-paper:      #F7F8FA;
+    --concreto-fog:        #EEF1F5;
+    --concreto-mist:       #E2E7EE;
+    --concreto-stone-300:  #C4CCD7;
+    --concreto-stone-500:  #8A93A2;
+    --concreto-stone-700:  #4F5A6B;
+    --concreto-graphite:   #2A3140;
+
+    /* Color · Status (extraídos das pílulas) */
+    --status-info-bg:      #E6EDF7;
+    --status-info-fg:      #1E3A6E;
+
+    --status-success-bg:   #E1F4E8;
+    --status-success-fg:   #15703F;
+
+    --status-warning-bg:   #FFF1DC;
+    --status-warning-fg:   #8A4A00;
+
+    --status-danger-bg:    #FCE3E3;
+    --status-danger-fg:    #9F1A1A;
+
+    --status-neutral-bg:   #ECEFF4;
+    --status-neutral-fg:   #4F5A6B;
+
+    /* Color · Data Cards (extraídos da tela financeira) */
+    --data-blue-bg:        #E8F0FB;
+    --data-blue-fg:        #1E4FA8;
+    --data-mint-bg:        #E5F6EB;
+    --data-mint-fg:        #1F7A45;
+    --data-lavender-bg:    #F1EBF7;
+    --data-lavender-fg:    #6D3F9E;
+    --data-cloud-bg:       #F0F3F8;
+    --data-cloud-fg:       #2A3140;
+
+    /* Typography */
+    --font-display: 'Sora', system-ui, sans-serif;
+    --font-body:    'Inter', system-ui, sans-serif;
+    --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+
+    /* Spacing scale (4pt) */
+    --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
+    --s-5: 20px; --s-6: 24px; --s-7: 32px; --s-8: 40px;
+    --s-9: 48px; --s-10: 64px; --s-11: 80px;
+
+    /* Radius */
+    --r-xs: 4px; --r-sm: 6px; --r-md: 10px;
+    --r-lg: 14px; --r-xl: 20px; --r-pill: 999px;
+
+    /* Elevation */
+    --elev-1: 0 1px 2px rgba(15,23,42,.04), 0 1px 1px rgba(15,23,42,.03);
+    --elev-2: 0 4px 12px rgba(15,23,42,.06), 0 1px 2px rgba(15,23,42,.04);
+    --elev-3: 0 12px 32px rgba(15,23,42,.10), 0 2px 6px rgba(15,23,42,.04);
+
+    /* Motion */
+    --ease: cubic-bezier(.2,.7,.2,1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--concreto-paper);
+    color: var(--concreto-ink);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* ============== TOPBAR (replica da plataforma) ============== */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--concreto-midnight);
+    color: var(--concreto-white);
+    display: flex; align-items: center; gap: var(--s-7);
+    padding: 0 var(--s-7);
+    height: 64px;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .brand {
+    display: flex; align-items: center; gap: var(--s-3);
+    font-family: var(--font-display);
+    font-weight: 700; letter-spacing: .14em;
+    font-size: 16px;
+  }
+  .brand-mark {
+    width: 28px; height: 28px;
+    background:
+      linear-gradient(135deg, #C8A66B 0%, #8C6A3B 100%);
+    position: relative;
+    transform: rotate(-8deg);
+    border-radius: 3px;
+    box-shadow: inset 0 -6px 0 rgba(0,0,0,.18);
+  }
+  .brand-mark::after {
+    content:""; position:absolute; inset:5px;
+    border: 1.5px solid rgba(255,255,255,.55);
+    border-radius: 1px;
+  }
+  .topnav {
+    display: flex; align-items: center; gap: var(--s-2);
+    margin-left: var(--s-4);
+  }
+  .topnav a {
+    display: inline-flex; align-items: center; gap: var(--s-2);
+    color: rgba(255,255,255,.78);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 12px; letter-spacing: .12em; font-weight: 600;
+    padding: var(--s-2) var(--s-4);
+    border-radius: var(--r-sm);
+    transition: background .2s var(--ease), color .2s var(--ease);
+  }
+  .topnav a:hover { color: white; background: rgba(255,255,255,.06); }
+  .topnav a.active { color: white; background: rgba(255,255,255,.10); }
+  .topbar .right { margin-left: auto; display: flex; gap: var(--s-3); align-items: center; }
+  .fund-select {
+    background: var(--concreto-navy);
+    color: white; border: 1px solid rgba(255,255,255,.10);
+    padding: var(--s-2) var(--s-4); border-radius: var(--r-sm);
+    font-size: 13px; cursor: pointer;
+    display: flex; align-items: center; gap: var(--s-2);
+  }
+  .icon-btn {
+    width: 36px; height: 36px; display: grid; place-items: center;
+    border-radius: var(--r-pill); background: transparent;
+    color: rgba(255,255,255,.85); border: 1px solid transparent;
+    cursor: pointer; transition: background .2s var(--ease);
+  }
+  .icon-btn:hover { background: rgba(255,255,255,.08); }
+
+  /* ============== LAYOUT ============== */
+  .shell { display: grid; grid-template-columns: 280px 1fr; min-height: calc(100vh - 64px); }
+  .sidebar {
+    background: var(--concreto-white);
+    border-right: 1px solid var(--concreto-mist);
+    padding: var(--s-7) var(--s-5);
+    position: sticky; top: 64px;
+    align-self: start; max-height: calc(100vh - 64px); overflow-y: auto;
+  }
+  .sidebar h4 {
+    font-family: var(--font-display);
+    font-size: 11px; font-weight: 700; letter-spacing: .18em;
+    color: var(--concreto-stone-500); text-transform: uppercase;
+    margin: var(--s-6) 0 var(--s-3);
+  }
+  .side-link {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: var(--s-3) var(--s-3);
+    border-radius: var(--r-sm);
+    color: var(--concreto-graphite);
+    font-size: 14px; font-weight: 500;
+    text-decoration: none;
+    margin-bottom: 2px;
+    transition: background .15s var(--ease);
+    cursor: pointer;
+  }
+  .side-link:hover { background: var(--concreto-fog); }
+  .side-link.active { background: var(--concreto-navy); color: white; box-shadow: var(--elev-1); }
+
+  .main {
+    padding: var(--s-9) var(--s-9);
+    max-width: 1280px;
+  }
+
+  /* ============== TYPOGRAPHY ============== */
+  .h-display {
+    font-family: var(--font-display);
+    font-weight: 800; letter-spacing: -.025em;
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1.02;
+    color: var(--concreto-midnight);
+  }
+  .h-eyebrow {
+    font-family: var(--font-display);
+    font-size: 11px; letter-spacing: .24em; text-transform: uppercase;
+    color: var(--concreto-stone-500); font-weight: 600;
+    margin-bottom: var(--s-4);
+    display: inline-flex; align-items: center; gap: var(--s-3);
+  }
+  .h-eyebrow::before {
+    content:""; width: 24px; height: 1px; background: var(--concreto-stone-500);
+  }
+  .h-section {
+    font-family: var(--font-display);
+    font-size: 28px; font-weight: 700; letter-spacing: -.018em;
+    color: var(--concreto-midnight);
+    margin-bottom: var(--s-2);
+  }
+  .h-sub {
+    color: var(--concreto-stone-700);
+    font-size: 15px; max-width: 60ch; line-height: 1.6;
+  }
+  .h-card {
+    font-family: var(--font-display);
+    font-size: 18px; font-weight: 600; letter-spacing: -.01em;
+    color: var(--concreto-midnight);
+  }
+  .label-meta {
+    font-size: 11px; text-transform: uppercase; letter-spacing: .14em;
+    color: var(--concreto-stone-500); font-weight: 600;
+  }
+
+  /* ============== SECTION SCAFFOLD ============== */
+  .section { margin-bottom: var(--s-11); }
+  .section-head { margin-bottom: var(--s-7); }
+  .section-divider {
+    height: 1px; background: var(--concreto-mist);
+    margin: var(--s-9) 0;
+  }
+
+  /* ============== HERO ============== */
+  .hero {
+    padding: var(--s-10) 0 var(--s-9);
+    border-bottom: 1px solid var(--concreto-mist);
+    margin-bottom: var(--s-9);
+    position: relative;
+  }
+  .hero-meta {
+    display: grid; grid-template-columns: repeat(3, auto);
+    gap: var(--s-7); margin-top: var(--s-7);
+    padding-top: var(--s-6); border-top: 1px solid var(--concreto-mist);
+  }
+  .hero-meta dt { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--concreto-stone-500); margin-bottom: 4px; font-weight: 600; }
+  .hero-meta dd { font-family: var(--font-display); font-weight: 700; font-size: 18px; color: var(--concreto-midnight); }
+
+  /* ============== COLOR ============== */
+  .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: var(--s-3); }
+  .swatch {
+    border: 1px solid var(--concreto-mist);
+    border-radius: var(--r-md);
+    overflow: hidden; background: white;
+    transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+  }
+  .swatch:hover { transform: translateY(-2px); box-shadow: var(--elev-2); }
+  .swatch-sample { height: 96px; position: relative; }
+  .swatch-sample::after {
+    content: attr(data-hex);
+    position: absolute; right: 10px; bottom: 8px;
+    font-family: var(--font-mono); font-size: 11px;
+    color: rgba(255,255,255,.85);
+    background: rgba(0,0,0,.25); padding: 2px 6px; border-radius: 3px;
+  }
+  .swatch-sample.is-light::after { color: rgba(0,0,0,.7); background: rgba(255,255,255,.6); }
+  .swatch-meta { padding: var(--s-3) var(--s-4); }
+  .swatch-meta strong { display: block; font-size: 13px; font-weight: 600; color: var(--concreto-midnight); margin-bottom: 2px; }
+  .swatch-meta span { font-family: var(--font-mono); font-size: 11px; color: var(--concreto-stone-500); }
+
+  /* ============== TYPOGRAPHY DISPLAY ============== */
+  .type-row {
+    display: grid; grid-template-columns: 200px 1fr;
+    align-items: baseline;
+    padding: var(--s-6) 0;
+    border-bottom: 1px dashed var(--concreto-mist);
+  }
+  .type-row:last-child { border: 0; }
+  .type-row .label { font-family: var(--font-mono); font-size: 11px; color: var(--concreto-stone-500); }
+  .type-row .label small { display: block; color: var(--concreto-stone-700); margin-top: 4px; text-transform: none; letter-spacing: 0; }
+
+  /* ============== BUTTONS ============== */
+  .btn {
+    display: inline-flex; align-items: center; gap: var(--s-2);
+    padding: 10px 18px; border-radius: var(--r-sm);
+    font-family: var(--font-body); font-weight: 600; font-size: 14px;
+    border: 1px solid transparent; cursor: pointer;
+    transition: transform .12s var(--ease), background .2s var(--ease), box-shadow .2s var(--ease);
+    text-decoration: none;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-primary { background: var(--concreto-midnight); color: white; box-shadow: var(--elev-1); }
+  .btn-primary:hover { background: var(--concreto-navy); box-shadow: var(--elev-2); }
+  .btn-secondary { background: white; color: var(--concreto-midnight); border-color: var(--concreto-mist); }
+  .btn-secondary:hover { background: var(--concreto-fog); }
+  .btn-ghost { background: transparent; color: var(--concreto-graphite); }
+  .btn-ghost:hover { background: var(--concreto-fog); }
+  .btn-danger { background: #B22B2B; color: white; }
+  .btn-danger:hover { background: #971F1F; }
+  .btn-sm { padding: 6px 12px; font-size: 13px; }
+  .btn-lg { padding: 14px 24px; font-size: 15px; }
+
+  /* ============== STATUS PILLS ============== */
+  .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 12px;
+    border-radius: var(--r-pill);
+    font-size: 12px; font-weight: 600;
+    line-height: 1.3;
+  }
+  .pill::before {
+    content:""; width: 6px; height: 6px; border-radius: 50%;
+    background: currentColor; opacity: .9;
+  }
+  .pill-info    { background: var(--status-info-bg);    color: var(--status-info-fg); }
+  .pill-success { background: var(--status-success-bg); color: var(--status-success-fg); }
+  .pill-warning { background: var(--status-warning-bg); color: var(--status-warning-fg); }
+  .pill-danger  { background: var(--status-danger-bg);  color: var(--status-danger-fg); }
+  .pill-neutral { background: var(--status-neutral-bg); color: var(--status-neutral-fg); }
+
+  /* Tag (sem dot) */
+  .tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px; border-radius: var(--r-sm);
+    background: var(--concreto-fog); color: var(--concreto-graphite);
+    font-size: 12px; font-weight: 500;
+    border: 1px solid var(--concreto-mist);
+  }
+  .tag svg { width: 12px; height: 12px; opacity: .7; }
+
+  /* ============== INPUTS ============== */
+  .field { display: block; margin-bottom: var(--s-4); }
+  .field-label {
+    display: block; font-size: 12px; color: var(--concreto-stone-700);
+    margin-bottom: var(--s-2); font-weight: 500;
+  }
+  .input {
+    width: 100%; padding: 11px 14px;
+    background: white; border: 1px solid var(--concreto-mist);
+    border-radius: var(--r-sm); font-family: var(--font-body);
+    font-size: 14px; color: var(--concreto-ink);
+    transition: border-color .15s var(--ease), box-shadow .15s var(--ease);
+  }
+  .input:focus {
+    outline: none; border-color: var(--concreto-navy);
+    box-shadow: 0 0 0 3px rgba(17,37,74,.10);
+  }
+  .input-search {
+    background: white; padding-left: 44px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238A93A2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>");
+    background-repeat: no-repeat;
+    background-position: 16px center;
+  }
+
+  /* ============== STEPPER (do fluxo Criar Operação) ============== */
+  .stepper {
+    display: flex; align-items: center; gap: var(--s-2);
+    padding: var(--s-4); background: white;
+    border: 1px solid var(--concreto-mist); border-radius: var(--r-md);
+  }
+  .step {
+    flex: 1; display: flex; align-items: center; gap: var(--s-3);
+    padding: var(--s-3) var(--s-4); border-radius: var(--r-sm);
+    color: var(--concreto-stone-500);
+    border: 1px solid transparent;
+    background: transparent;
+    font-size: 14px;
+  }
+  .step .num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: white; border: 1px solid var(--concreto-mist);
+    color: var(--concreto-stone-700);
+    display: grid; place-items: center;
+    font-weight: 600; font-size: 13px;
+    flex-shrink: 0;
+  }
+  .step.is-active {
+    background: var(--concreto-midnight); color: white;
+  }
+  .step.is-active .num { background: rgba(255,255,255,.15); border-color: transparent; color: white; }
+  .step.is-complete .num { background: var(--status-success-fg); border-color: var(--status-success-fg); color: white; }
+  .step-divider { width: 24px; height: 1px; background: var(--concreto-mist); flex-shrink: 0; }
+
+  /* ============== DATA CARDS (financeiros) ============== */
+  .data-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: var(--s-3); }
+  .data-card {
+    padding: var(--s-5);
+    border: 1px solid var(--concreto-mist);
+    border-radius: var(--r-md);
+    background: white;
+    transition: transform .2s var(--ease), box-shadow .2s var(--ease);
+  }
+  .data-card:hover { box-shadow: var(--elev-2); transform: translateY(-1px); }
+  .data-card .label-meta { margin-bottom: var(--s-3); }
+  .data-card .value {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 22px; letter-spacing: -.015em;
+  }
+  .data-card.is-blue     { background: var(--data-blue-bg);     border-color: transparent; }
+  .data-card.is-blue .value { color: var(--data-blue-fg); }
+  .data-card.is-mint     { background: var(--data-mint-bg);     border-color: transparent; }
+  .data-card.is-mint .value { color: var(--data-mint-fg); }
+  .data-card.is-lavender { background: var(--data-lavender-bg); border-color: transparent; }
+  .data-card.is-lavender .value { color: var(--data-lavender-fg); }
+  .data-card.is-cloud    { background: var(--data-cloud-bg);    border-color: transparent; }
+  .data-card.is-cloud .value { color: var(--data-cloud-fg); }
+
+  /* ============== TABLE ============== */
+  .table-wrap {
+    background: white; border: 1px solid var(--concreto-mist);
+    border-radius: var(--r-md); overflow: hidden;
+    box-shadow: var(--elev-1);
+  }
+  table.concreto {
+    width: 100%; border-collapse: collapse;
+    font-size: 13px;
+  }
+  table.concreto th {
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 11px; letter-spacing: .12em;
+    color: var(--concreto-stone-500);
+    font-weight: 600;
+    padding: var(--s-4) var(--s-5);
+    background: var(--concreto-paper);
+    border-bottom: 1px solid var(--concreto-mist);
+    white-space: nowrap;
+  }
+  table.concreto th.num, table.concreto td.num { text-align: right; }
+  table.concreto td {
+    padding: var(--s-5);
+    border-bottom: 1px solid var(--concreto-fog);
+    vertical-align: middle;
+    color: var(--concreto-graphite);
+  }
+  table.concreto tr:last-child td { border-bottom: 0; }
+  table.concreto tr:hover td { background: var(--concreto-paper); }
+  .op-id { font-family: var(--font-display); font-weight: 700; color: var(--concreto-midnight); font-size: 14px; }
+  .op-sub { font-family: var(--font-mono); font-size: 11px; color: var(--concreto-stone-500); margin-top: 2px; }
+  .num-strong { font-family: var(--font-display); font-weight: 600; color: var(--concreto-midnight); }
+  .badge-int {
+    display: inline-grid; place-items: center;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--concreto-fog); color: var(--concreto-graphite);
+    font-weight: 600; font-size: 12px;
+    border: 1px solid var(--concreto-mist);
+  }
+
+  /* ============== INFO PANEL (Validação Final) ============== */
+  .info-panel {
+    background: linear-gradient(135deg, var(--concreto-midnight) 0%, var(--concreto-navy-700) 100%);
+    color: white; border-radius: var(--r-md);
+    padding: var(--s-6) var(--s-7);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--s-5) var(--s-6);
+    align-items: center;
+    box-shadow: var(--elev-2);
+    position: relative; overflow: hidden;
+  }
+  .info-panel::before {
+    content: ""; position: absolute; right: -40px; top: -40px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(200,166,107,.18) 0%, transparent 70%);
+  }
+  .info-panel-icon {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: rgba(255,255,255,.10);
+    display: grid; place-items: center; color: #6BD18B;
+  }
+  .info-panel h3 { font-family: var(--font-display); font-size: 18px; font-weight: 600; }
+  .info-panel p { font-size: 13px; color: rgba(255,255,255,.65); margin-top: 2px; }
+  .info-panel-grid {
+    grid-column: 1 / -1; padding-top: var(--s-5);
+    border-top: 1px solid rgba(255,255,255,.10);
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-5);
+  }
+  .info-panel-grid .label-meta { color: rgba(255,255,255,.55); margin-bottom: 6px; }
+  .info-panel-grid .value { font-family: var(--font-display); font-weight: 700; font-size: 15px; }
+
+  /* ============== CARD ============== */
+  .card {
+    background: white;
+    border: 1px solid var(--concreto-mist);
+    border-radius: var(--r-md);
+    padding: var(--s-6);
+  }
+  .card-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-bottom: var(--s-4); margin-bottom: var(--s-5);
+    border-bottom: 1px solid var(--concreto-mist);
+  }
+
+  /* ============== DEFINITION LIST (form-summary do Resumo) ============== */
+  .def-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-6) var(--s-9);
+  }
+  .def-item dt {
+    font-size: 12px; color: var(--concreto-stone-500);
+    margin-bottom: 4px;
+  }
+  .def-item dd {
+    font-family: var(--font-display); font-weight: 600;
+    font-size: 15px; color: var(--concreto-midnight);
+  }
+
+  /* ============== FOOTER ACTIONS ============== */
+  .actions-bar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: var(--s-4) var(--s-6);
+    background: white;
+    border: 1px solid var(--concreto-mist);
+    border-radius: var(--r-md);
+    box-shadow: var(--elev-1);
+  }
+
+  /* ============== SPACING TOKENS ============== */
+  .spacing-row { display: flex; gap: var(--s-4); align-items: flex-end; flex-wrap: wrap; }
+  .spacing-token { text-align: center; }
+  .spacing-token .bar {
+    background: var(--concreto-navy); border-radius: var(--r-xs);
+    width: var(--w);
+    height: 24px;
+    margin-bottom: 6px;
+  }
+  .spacing-token .label { font-family: var(--font-mono); font-size: 11px; color: var(--concreto-stone-500); }
+  .spacing-token strong { display: block; font-size: 13px; color: var(--concreto-midnight); margin-bottom: 4px; }
+
+  /* ============== RADIUS TOKENS ============== */
+  .radius-row { display: flex; gap: var(--s-4); flex-wrap: wrap; }
+  .radius-sample {
+    width: 80px; height: 80px;
+    background: var(--concreto-navy);
+    display: grid; place-items: center;
+    color: white; font-family: var(--font-mono);
+    font-size: 11px;
+  }
+
+  /* ============== ELEVATION ============== */
+  .elev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-5); }
+  .elev-card {
+    background: white; border-radius: var(--r-md);
+    padding: var(--s-6); text-align: center;
+  }
+  .elev-1 { box-shadow: var(--elev-1); }
+  .elev-2 { box-shadow: var(--elev-2); }
+  .elev-3 { box-shadow: var(--elev-3); }
+
+  /* ============== ICON SAMPLE ============== */
+  .icon-strip {
+    display: flex; gap: var(--s-3); flex-wrap: wrap;
+  }
+  .icon-cell {
+    width: 64px; height: 64px;
+    display: grid; place-items: center;
+    background: white; border: 1px solid var(--concreto-mist);
+    border-radius: var(--r-sm); color: var(--concreto-graphite);
+  }
+
+  /* ============== SCROLL BEHAVIOUR ============== */
+  html { scroll-behavior: smooth; }
+
+  /* ============== UTIL ============== */
+  .row { display: flex; gap: var(--s-3); flex-wrap: wrap; align-items: center; }
+  .stack { display: grid; gap: var(--s-3); }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-7); }
+
+  /* ============== RESPONSIVE ============== */
+  @media (max-width: 980px) {
+    .shell { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .main { padding: var(--s-6); }
+    .topnav { display: none; }
+    .grid-2, .info-panel-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== TOPBAR ===================== -->
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark"></div>
+    <span>CONCRETO</span>
+  </div>
+  <nav class="topnav">
+    <a>📋 Escritório</a>
+    <a>👥 Cotista</a>
+    <a>💳 Cobrança</a>
+    <a class="active">📊 Operações</a>
+    <a>💲 Custos</a>
+    <a>📈 Financeiro</a>
+    <a>📑 Relatórios</a>
+    <a>🏛️ Fundos</a>
+  </nav>
+  <div class="right">
+    <button class="fund-select">Selecione o Fundo ▾</button>
+    <button class="icon-btn" aria-label="Buscar">🔍</button>
+    <button class="icon-btn" aria-label="Conta">👤</button>
+  </div>
+</header>
+
+<!-- ===================== SHELL ===================== -->
+<div class="shell">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h4>Design System</h4>
+    <a href="#fundamentos" class="side-link active">Fundamentos <span>→</span></a>
+    <a href="#cores" class="side-link">Cores</a>
+    <a href="#tipografia" class="side-link">Tipografia</a>
+    <a href="#espacamento" class="side-link">Espaçamento</a>
+    <a href="#elevacao" class="side-link">Elevação & Raio</a>
+
+    <h4>Componentes</h4>
+    <a href="#botoes" class="side-link">Botões</a>
+    <a href="#status" class="side-link">Pílulas & Tags</a>
+    <a href="#inputs" class="side-link">Inputs</a>
+    <a href="#stepper" class="side-link">Stepper</a>
+    <a href="#tabela" class="side-link">Tabela de Operações</a>
+    <a href="#cards-dados" class="side-link">Cards Financeiros</a>
+    <a href="#painel" class="side-link">Painel de Validação</a>
+    <a href="#resumo" class="side-link">Resumo de Operação</a>
+
+    <h4>Padrões</h4>
+    <a href="#layout" class="side-link">Layout & Navegação</a>
+    <a href="#voz" class="side-link">Voz & Tom</a>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+
+    <!-- HERO -->
+    <section class="hero" id="fundamentos">
+      <span class="h-eyebrow">Design System v1.0 · 2026</span>
+      <h1 class="h-display">Concreto.<br/>Sistemas que sustentam capital.</h1>
+      <p class="h-sub" style="margin-top: var(--s-5); font-size: 17px;">
+        Linguagem visual da plataforma de FIDC e crédito estruturado da Concreto.
+        Sóbria, densa em informação e construída para profissionais que decidem milhões em segundos.
+      </p>
+      <dl class="hero-meta">
+        <div><dt>Plataforma</dt><dd>Web · B2B</dd></div>
+        <div><dt>Domínio</dt><dd>Crédito Estruturado</dd></div>
+        <div><dt>Tom</dt><dd>Institucional · Preciso</dd></div>
+      </dl>
+    </section>
+
+    <!-- ===================== CORES ===================== -->
+    <section class="section" id="cores">
+      <div class="section-head">
+        <span class="h-eyebrow">01 · Fundamentos</span>
+        <h2 class="h-section">Cores</h2>
+        <p class="h-sub">Paleta ancorada no <em>midnight navy</em> da identidade Concreto. Neutros frios estruturam densidade visual; status e cards de dados usam pastéis saturados para legibilidade.</p>
+      </div>
+
+      <h3 class="h-card" style="margin-bottom: var(--s-4);">Marca</h3>
+      <div class="color-grid" style="margin-bottom: var(--s-7);">
+        <div class="swatch"><div class="swatch-sample" style="background:#0B1B33" data-hex="#0B1B33"></div><div class="swatch-meta"><strong>Midnight</strong><span>--concreto-midnight</span></div></div>
+        <div class="swatch"><div class="swatch-sample" style="background:#11254A" data-hex="#11254A"></div><div class="swatch-meta"><strong>Navy</strong><span>--concreto-navy</span></div></div>
+        <div class="swatch"><div class="swatch-sample" style="background:#1A3266" data-hex="#1A3266"></div><div class="swatch-meta"><strong>Navy 700</strong><span>--concreto-navy-700</span></div></div>
+        <div class="swatch"><div class="swatch-sample" style="background:#2D4A85" data-hex="#2D4A85"></div><div class="swatch-meta"><strong>Navy 500</strong><span>--concreto-navy-500</span></div></div>
+        <div class="swatch"><div class="swatch-sample" style="background:#0F172A" data-hex="#0F172A"></div><div class="swatch-meta"><strong>Ink</strong><span>--concreto-ink</span></div></div>
+      </div>
+
+      <h3 class="h-card" style="margin-bottom: var(--s-4);">Neutros</h3>
+      <div class="color-grid" style="margin-bottom: var(--s-7);">
+        <div class="swatch"><div class="swatch-sample is-light" style="background:#FFFFFF; border-bottom:1px solid var(--concreto-mist)" data-hex="#FFFFFF"></div><div class="swatch-meta"><strong>White</strong><span>--concreto-white</span></div></div>
+        <div class="swatch"><div class="swatch-sample is-light" style="background:#F7F8FA" data-hex="#F7F8FA"></div><div class="swatch-meta"><strong>Paper</strong><span>--concreto-paper</span></div></div>
+        <div class="swatch"><div class="swatch-sample is-light" style="background:#EEF1F5" data-hex="#EEF1F5"></div><div class="swatch-meta"><strong>Fog</strong><span>--concreto-fog</span></div></div>
+        <div class="swatch"><div class="swatch-sample is-light" style="background:#E2E7EE" data-hex="#E2E7EE"></div><div class="swatch-meta"><strong>Mist</strong><span>--concreto-mist</span></div></div>
+        <div class="swatch"><div class="swatch-sample is-light" style="background:#C4CCD7" data-hex="#C4CCD7"></div><div class="swatch-meta"><strong>Stone 300</strong><span>--concreto-stone-300</span></div></div>
+        <div class="swatch"><div class="swatch-sample" style="background:#8A93A2" data-hex="#8A93A2"></div><div class="swatch-meta"><strong>Stone 500</strong><span>--concreto-stone-500</span></div></div>
+        <div class="swatch"><div class="swatch-sample" style="background:#4F5A6B" data-hex="#4F5A6B"></div><div class="swatch-meta"><strong>Stone 700</strong><span>--concreto-stone-700</span></div></div>
+        <div class="swatch"><div class="swatch-sample" style="background:#2A3140" data-hex="#2A3140"></div><div class="swatch-meta"><strong>Graphite</strong><span>--concreto-graphite</span></div></div>
+      </div>
+
+      <h3 class="h-card" style="margin-bottom: var(--s-4);">Status</h3>
+      <div class="color-grid" style="margin-bottom: var(--s-7);">
+        <div class="swatch"><div class="swatch-sample is-light" style="background:#E6EDF7" data-hex="#E6EDF7"></div><div class="swatch-meta"><strong>Info BG</strong><span>Cadastrada</span></div></div>
+        <div class="swatch"><div class="swatch-sample is-light" style="background:#E1F4E8" data-hex="#E1F4E8"></div><div class="swatch-meta"><strong>Success BG</strong><span>Finalizada</span></div></div>
+        <div class="swatch"><div class="swatch-sample is-light" style="background:#FFF1DC" data-hex="#FFF1DC"></div><div class="swatch-meta"><strong>Warning BG</strong><span>Aguardando</span></div></div>
+        <div class="swatch"><div class="swatch-sample is-light" style="background:#FCE3E3" data-hex="#FCE3E3"></div><div class="swatch-meta"><strong>Danger BG</strong><span>Reprovado</span></div></div>
+        <div class="swatch"><div class="swatch-sample is-light" style="background:#ECEFF4" data-hex="#ECEFF4"></div><div class="swatch-meta"><strong>Neutral BG</strong><span>Rascunho</span></div></div>
+      </div>
+
+      <h3 class="h-card" style="margin-bottom: var(--s-4);">Data Cards (KPIs Financeiros)</h3>
+      <div class="color-grid">
+        <div class="swatch"><div class="swatch-sample is-light" style="background:#E8F0FB" data-hex="#E8F0FB"></div><div class="swatch-meta"><strong>Blue</strong><span>Ágio/Deságio</span></div></div>
+        <div class="swatch"><div class="swatch-sample is-light" style="background:#E5F6EB" data-hex="#E5F6EB"></div><div class="swatch-meta"><strong>Mint</strong><span>Valor Desembolso</span></div></div>
+        <div class="swatch"><div class="swatch-sample is-light" style="background:#F1EBF7" data-hex="#F1EBF7"></div><div class="swatch-meta"><strong>Lavender</strong><span>Total Adquirentes</span></div></div>
+        <div class="swatch"><div class="swatch-sample is-light" style="background:#F0F3F8" data-hex="#F0F3F8"></div><div class="swatch-meta"><strong>Cloud</strong><span>Valores neutros</span></div></div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ===================== TIPOGRAFIA ===================== -->
+    <section class="section" id="tipografia">
+      <div class="section-head">
+        <span class="h-eyebrow">02 · Fundamentos</span>
+        <h2 class="h-section">Tipografia</h2>
+        <p class="h-sub">Pareamento de <strong>Sora</strong> (display, geometria precisa, autoridade) com <strong>Inter</strong> (texto, alta densidade legível em UI). <strong>JetBrains Mono</strong> para códigos, IDs e valores tabulares.</p>
+      </div>
+
+      <div class="card" style="padding: var(--s-2) var(--s-7);">
+        <div class="type-row">
+          <div class="label">Display / Sora 800<br/><small>Hero, marketing</small></div>
+          <div class="h-display" style="font-size:48px;">Capital com clareza</div>
+        </div>
+        <div class="type-row">
+          <div class="label">Section / Sora 700 · 28px<br/><small>Títulos de página</small></div>
+          <div class="h-section">Operações Ativas</div>
+        </div>
+        <div class="type-row">
+          <div class="label">Card / Sora 600 · 18px<br/><small>Títulos de card</small></div>
+          <div class="h-card">Validação Final da Operação</div>
+        </div>
+        <div class="type-row">
+          <div class="label">Body / Inter 400 · 15px<br/><small>Texto corrente</small></div>
+          <div style="font-size:15px; color: var(--concreto-graphite);">Fluxo unificado para criação de operações individual ou em lote, com importação de planilha e validação por etapa.</div>
+        </div>
+        <div class="type-row">
+          <div class="label">Meta / Inter 500 · 12px<br/><small>Labels de campos</small></div>
+          <div style="font-size:12px; color: var(--concreto-stone-700);">Documento do cedente</div>
+        </div>
+        <div class="type-row">
+          <div class="label">Eyebrow / Sora 600 · 11px<br/><small>Label uppercase</small></div>
+          <div class="label-meta">VALOR DE AQUISIÇÃO</div>
+        </div>
+        <div class="type-row">
+          <div class="label">Mono / JetBrains 500 · 12px<br/><small>IDs, contratos, hashes</small></div>
+          <div style="font-family: var(--font-mono); font-size: 13px; color: var(--concreto-graphite);">CCB 53807851 · 12.345.678/0001-90</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ===================== ESPAÇAMENTO ===================== -->
+    <section class="section" id="espacamento">
+      <div class="section-head">
+        <span class="h-eyebrow">03 · Fundamentos</span>
+        <h2 class="h-section">Espaçamento</h2>
+        <p class="h-sub">Escala de 4pt. Todas as gaps, paddings e margens da plataforma derivam destes 11 tokens.</p>
+      </div>
+
+      <div class="card">
+        <div class="spacing-row">
+          <div class="spacing-token"><strong>4</strong><div class="bar" style="--w:4px"></div><div class="label">--s-1</div></div>
+          <div class="spacing-token"><strong>8</strong><div class="bar" style="--w:8px"></div><div class="label">--s-2</div></div>
+          <div class="spacing-token"><strong>12</strong><div class="bar" style="--w:12px"></div><div class="label">--s-3</div></div>
+          <div class="spacing-token"><strong>16</strong><div class="bar" style="--w:16px"></div><div class="label">--s-4</div></div>
+          <div class="spacing-token"><strong>20</strong><div class="bar" style="--w:20px"></div><div class="label">--s-5</div></div>
+          <div class="spacing-token"><strong>24</strong><div class="bar" style="--w:24px"></div><div class="label">--s-6</div></div>
+          <div class="spacing-token"><strong>32</strong><div class="bar" style="--w:32px"></div><div class="label">--s-7</div></div>
+          <div class="spacing-token"><strong>40</strong><div class="bar" style="--w:40px"></div><div class="label">--s-8</div></div>
+          <div class="spacing-token"><strong>48</strong><div class="bar" style="--w:48px"></div><div class="label">--s-9</div></div>
+          <div class="spacing-token"><strong>64</strong><div class="bar" style="--w:64px"></div><div class="label">--s-10</div></div>
+          <div class="spacing-token"><strong>80</strong><div class="bar" style="--w:80px"></div><div class="label">--s-11</div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ===================== ELEVAÇÃO & RAIO ===================== -->
+    <section class="section" id="elevacao">
+      <div class="section-head">
+        <span class="h-eyebrow">04 · Fundamentos</span>
+        <h2 class="h-section">Elevação & Raio</h2>
+        <p class="h-sub">Sombras suaves, frias, com baixa opacidade — preservam a sobriedade institucional. Raios moderados (4-14px) para um toque contemporâneo sem perder o caráter sério.</p>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <h3 class="h-card" style="margin-bottom: var(--s-4);">Elevações</h3>
+          <div class="elev-grid">
+            <div class="elev-card elev-1">
+              <strong style="font-family: var(--font-mono); font-size:12px;">elev-1</strong>
+              <p style="font-size:12px; color:var(--concreto-stone-500); margin-top:6px;">Cards inline</p>
+            </div>
+            <div class="elev-card elev-2">
+              <strong style="font-family: var(--font-mono); font-size:12px;">elev-2</strong>
+              <p style="font-size:12px; color:var(--concreto-stone-500); margin-top:6px;">Hover, painéis</p>
+            </div>
+            <div class="elev-card elev-3">
+              <strong style="font-family: var(--font-mono); font-size:12px;">elev-3</strong>
+              <p style="font-size:12px; color:var(--concreto-stone-500); margin-top:6px;">Modais, dropdowns</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3 class="h-card" style="margin-bottom: var(--s-4);">Raios</h3>
+          <div class="radius-row">
+            <div class="radius-sample" style="border-radius:4px">4 · xs</div>
+            <div class="radius-sample" style="border-radius:6px">6 · sm</div>
+            <div class="radius-sample" style="border-radius:10px">10 · md</div>
+            <div class="radius-sample" style="border-radius:14px">14 · lg</div>
+            <div class="radius-sample" style="border-radius:50%">pill</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ===================== BOTÕES ===================== -->
+    <section class="section" id="botoes">
+      <div class="section-head">
+        <span class="h-eyebrow">05 · Componentes</span>
+        <h2 class="h-section">Botões</h2>
+        <p class="h-sub">Hierarquia clara: <strong>Primary</strong> = ação principal (CTA navy escuro), <strong>Secondary</strong> = ação alternativa (outline), <strong>Ghost</strong> = ações terciárias em listas, <strong>Danger</strong> = destrutivo.</p>
+      </div>
+
+      <div class="card">
+        <div class="row" style="margin-bottom: var(--s-6);">
+          <button class="btn btn-primary">+ Criar Operação</button>
+          <button class="btn btn-secondary">Capas do Fundo</button>
+          <button class="btn btn-ghost">Encerrar</button>
+          <button class="btn btn-danger">Remover</button>
+        </div>
+        <div class="row" style="margin-bottom: var(--s-6);">
+          <button class="btn btn-primary btn-sm">Aprovar</button>
+          <button class="btn btn-secondary btn-sm">Exportar CNAB</button>
+          <button class="btn btn-ghost btn-sm">Editar</button>
+        </div>
+        <div class="row">
+          <button class="btn btn-primary btn-lg">Cadastrar Operação</button>
+          <button class="btn btn-secondary btn-lg">‹ Voltar</button>
+          <button class="btn btn-primary btn-lg">Próximo ›</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ===================== STATUS ===================== -->
+    <section class="section" id="status">
+      <div class="section-head">
+        <span class="h-eyebrow">06 · Componentes</span>
+        <h2 class="h-section">Pílulas de Status & Tags</h2>
+        <p class="h-sub">As pílulas comunicam o estado de uma operação no ciclo de vida. As tags identificam fundo, tipo de título e atributos categóricos.</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3 class="h-card" style="margin-bottom: var(--s-5);">Status de Operação</h3>
+          <div class="row">
+            <span class="pill pill-info">Cadastrada</span>
+            <span class="pill pill-warning">Aguardando Pagamento</span>
+            <span class="pill pill-success">Finalizada</span>
+            <span class="pill pill-danger">Reprovado</span>
+            <span class="pill pill-neutral">Rascunho</span>
+          </div>
+          <p style="font-size: 13px; color: var(--concreto-stone-700); margin-top: var(--s-5); line-height: 1.6;">
+            Cada status corresponde a uma fase do workflow de cessão de crédito. A cor reforça urgência sem competir com os botões de ação ao lado.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="h-card" style="margin-bottom: var(--s-5);">Tags de Categoria</h3>
+          <div class="row">
+            <span class="tag">🏢 Brooklyn</span>
+            <span class="tag">🏢 FIDC Brasileira</span>
+            <span class="tag">CCB</span>
+            <span class="tag">CNPJ</span>
+            <span class="tag">PRICE</span>
+          </div>
+          <p style="font-size: 13px; color: var(--concreto-stone-700); margin-top: var(--s-5); line-height: 1.6;">
+            Visual neutro; não compete com os status. Aceita ícone à esquerda para fundos e tipos de operação.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ===================== INPUTS ===================== -->
+    <section class="section" id="inputs">
+      <div class="section-head">
+        <span class="h-eyebrow">07 · Componentes</span>
+        <h2 class="h-section">Inputs & Busca</h2>
+      </div>
+
+      <div class="card">
+        <div class="grid-2">
+          <div>
+            <div class="field">
+              <label class="field-label">Buscar operações</label>
+              <input class="input input-search" placeholder="Buscar por operação, sacado ou título..." />
+            </div>
+            <div class="field">
+              <label class="field-label">Rótulo da operação</label>
+              <input class="input" value="OP Garantia Cartão de Crédito" />
+            </div>
+            <div class="field">
+              <label class="field-label">Documento do cedente</label>
+              <input class="input" value="12.345.678/0001-90" />
+            </div>
+          </div>
+          <div>
+            <div class="field">
+              <label class="field-label">Tipo de cedente</label>
+              <select class="input">
+                <option>CNPJ</option>
+                <option>CPF</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="field-label">Sistema de amortização</label>
+              <select class="input">
+                <option>PRICE</option>
+                <option>SAC</option>
+                <option>Bullet</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="field-label">Data da operação</label>
+              <input class="input" type="text" value="14/04/2026" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ===================== STEPPER ===================== -->
+    <section class="section" id="stepper">
+      <div class="section-head">
+        <span class="h-eyebrow">08 · Componentes</span>
+        <h2 class="h-section">Stepper de Fluxo</h2>
+        <p class="h-sub">Componente principal de fluxos multi-etapa (criação de operação, importação em lote, configuração de fundos). Estado ativo em midnight, completos em verde, futuros em neutro.</p>
+      </div>
+
+      <div class="stepper">
+        <div class="step is-complete"><span class="num">✓</span> Importação de planilha</div>
+        <div class="step-divider"></div>
+        <div class="step is-active"><span class="num">2</span> Dados da Operação (Resumo)</div>
+        <div class="step-divider"></div>
+        <div class="step"><span class="num">3</span> Resumo para contrato</div>
+        <div class="step-divider"></div>
+        <div class="step"><span class="num">4</span> Finalização</div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ===================== TABELA ===================== -->
+    <section class="section" id="tabela">
+      <div class="section-head">
+        <span class="h-eyebrow">09 · Componentes</span>
+        <h2 class="h-section">Tabela de Operações</h2>
+        <p class="h-sub">Densa, escaneável, com colunas alinhadas à direita para valores numéricos. Status e ações in-row para acelerar o workflow do operador.</p>
+      </div>
+
+      <div class="table-wrap">
+        <table class="concreto">
+          <thead>
+            <tr>
+              <th>Operação</th>
+              <th>Fundo</th>
+              <th>Sacado/Cliente</th>
+              <th class="num">Valor de Aquisição</th>
+              <th class="num">Parcelas</th>
+              <th>Vencimento</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="op-id">20260414a</div>
+                <div class="op-sub">CCB 53807851</div>
+              </td>
+              <td><span class="tag">🏢 Brooklyn</span></td>
+              <td>MM Turismo &amp; Viagens S.A.</td>
+              <td class="num num-strong">R$ 5.887.405,00</td>
+              <td class="num"><span class="badge-int">2</span></td>
+              <td>29/04/2026</td>
+              <td><span class="pill pill-info">Cadastrada</span></td>
+              <td><button class="btn btn-secondary btn-sm">Exportar CNAB</button></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="op-id">20260415b</div>
+                <div class="op-sub">CCB 53807852</div>
+              </td>
+              <td><span class="tag">🏢 Brooklyn</span></td>
+              <td>Tech Solutions Ltda</td>
+              <td class="num num-strong">R$ 3.245.000,00</td>
+              <td class="num"><span class="badge-int">3</span></td>
+              <td>15/05/2026</td>
+              <td><span class="pill pill-warning">Aguardando</span></td>
+              <td><button class="btn btn-primary btn-sm">Aprovar</button></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="op-id">20260416c</div>
+                <div class="op-sub">CCB 53807853</div>
+              </td>
+              <td><span class="tag">🏢 FIDC Brasileira</span></td>
+              <td>Comercial ABC S.A.</td>
+              <td class="num num-strong">R$ 8.500.000,00</td>
+              <td class="num"><span class="badge-int">5</span></td>
+              <td>20/06/2026</td>
+              <td><span class="pill pill-success">Finalizada</span></td>
+              <td><button class="btn btn-ghost btn-sm">Detalhes</button></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="op-id">20260417d</div>
+                <div class="op-sub">CCB 53807854</div>
+              </td>
+              <td><span class="tag">🏢 Brooklyn</span></td>
+              <td>Construtora XYZ Ltda</td>
+              <td class="num num-strong">R$ 12.300.000,00</td>
+              <td class="num"><span class="badge-int">4</span></td>
+              <td>10/07/2026</td>
+              <td><span class="pill pill-neutral">Rascunho</span></td>
+              <td><button class="btn btn-ghost btn-sm">Editar</button></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="op-id">20260419f</div>
+                <div class="op-sub">CCB 53807856</div>
+              </td>
+              <td><span class="tag">🏢 Brooklyn</span></td>
+              <td>Transportadora Beta Ltda</td>
+              <td class="num num-strong">R$ 4.200.000,00</td>
+              <td class="num"><span class="badge-int">3</span></td>
+              <td>30/05/2026</td>
+              <td><span class="pill pill-danger">Reprovado</span></td>
+              <td><button class="btn btn-ghost btn-sm">Revisar</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ===================== CARDS DE DADOS ===================== -->
+    <section class="section" id="cards-dados">
+      <div class="section-head">
+        <span class="h-eyebrow">10 · Componentes</span>
+        <h2 class="h-section">Cards Financeiros</h2>
+        <p class="h-sub">KPIs de uma operação ou painel. Cores categóricas suaves codificam o tipo de valor sem ruído visual.</p>
+      </div>
+
+      <div class="data-grid">
+        <div class="data-card">
+          <div class="label-meta">Valor de Aquisição</div>
+          <div class="value">R$ 5.887.405,00</div>
+        </div>
+        <div class="data-card is-blue">
+          <div class="label-meta">Ágio/Deságio</div>
+          <div class="value">R$ 617.573,06</div>
+        </div>
+        <div class="data-card">
+          <div class="label-meta">Valor Futuro</div>
+          <div class="value">R$ 6.504.978,06</div>
+        </div>
+        <div class="data-card is-mint">
+          <div class="label-meta">Valor Desembolso</div>
+          <div class="value">R$ 5.887.405,00</div>
+        </div>
+        <div class="data-card is-lavender">
+          <div class="label-meta">Total Adquirentes</div>
+          <div class="value">R$ 6.504.978,06</div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: var(--s-5);">
+        <span class="pill pill-neutral">📋 Total de parcelas: 2</span>
+        <span class="pill pill-success">✓ Aprovados: 2</span>
+        <span class="pill pill-danger">✕ Reprovados: 0</span>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ===================== PAINEL DE VALIDAÇÃO ===================== -->
+    <section class="section" id="painel">
+      <div class="section-head">
+        <span class="h-eyebrow">11 · Componentes</span>
+        <h2 class="h-section">Painel de Validação</h2>
+        <p class="h-sub">Card escuro de destaque para confirmações finais. Faz o operador parar e revisar antes de uma ação irreversível.</p>
+      </div>
+
+      <div class="info-panel">
+        <div class="info-panel-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div>
+          <h3>Validação Final da Operação</h3>
+          <p>Revise as informações antes de finalizar.</p>
+        </div>
+        <div class="info-panel-grid">
+          <div>
+            <div class="label-meta">Fundo</div>
+            <div class="value">FUNDO BROOKLYN</div>
+          </div>
+          <div>
+            <div class="label-meta">Cedente</div>
+            <div class="value">BMP Sociedade de Crédito Direto SA</div>
+          </div>
+          <div>
+            <div class="label-meta">Tipo de Título</div>
+            <div class="value">CCB</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ===================== RESUMO DE OPERAÇÃO ===================== -->
+    <section class="section" id="resumo">
+      <div class="section-head">
+        <span class="h-eyebrow">12 · Componentes</span>
+        <h2 class="h-section">Resumo de Operação</h2>
+        <p class="h-sub">Padrão DefList para mostrar dados importados de planilha ou de uma operação aprovada. Layout em duas colunas, label discreto, valor em peso de display.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="label-meta">Etapa 2</div>
+            <h3 class="h-card" style="margin-top:4px;">Dados da operação</h3>
+          </div>
+          <span class="pill pill-info">Importado de planilha</span>
+        </div>
+
+        <dl class="def-grid">
+          <div class="def-item"><dt>Fundo</dt><dd>FUNDO BROOKLYN</dd></div>
+          <div class="def-item"><dt>Rótulo da operação</dt><dd>OP Garantia Cartão de Crédito</dd></div>
+          <div class="def-item"><dt>Tipo de título</dt><dd>CCB</dd></div>
+          <div class="def-item"><dt>Cedente</dt><dd>BMP Sociedade de Crédito Direto SA</dd></div>
+          <div class="def-item"><dt>Tipo de cedente</dt><dd>CNPJ</dd></div>
+          <div class="def-item"><dt>Documento do cedente</dt><dd>12.345.678/0001-90</dd></div>
+          <div class="def-item"><dt>Coobrigação</dt><dd>Sim</dd></div>
+          <div class="def-item"><dt>Nº do Termo de Cessão</dt><dd>20260414a</dd></div>
+          <div class="def-item"><dt>Data da operação</dt><dd>14/04/2026</dd></div>
+          <div class="def-item"><dt>Sistema de amortização</dt><dd>PRICE</dd></div>
+        </dl>
+      </div>
+
+      <div class="actions-bar" style="margin-top: var(--s-5);">
+        <button class="btn btn-secondary">‹ Voltar</button>
+        <div class="row">
+          <span style="font-size:13px; color:var(--concreto-stone-700);">Etapa 2 de 4</span>
+          <button class="btn btn-primary">Próximo ›</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ===================== LAYOUT ===================== -->
+    <section class="section" id="layout">
+      <div class="section-head">
+        <span class="h-eyebrow">13 · Padrões</span>
+        <h2 class="h-section">Layout & Navegação</h2>
+        <p class="h-sub">Estrutura de três zonas: <strong>topbar midnight</strong> (módulos do produto), <strong>sidebar branca</strong> (sub-navegação contextual) e <strong>workspace</strong> em paper.</p>
+      </div>
+
+      <div class="card">
+        <div style="display:grid; grid-template-columns: auto 1fr; gap: var(--s-7);">
+          <div style="background: var(--concreto-fog); padding: var(--s-5); border-radius: var(--r-md); display:flex; flex-direction:column; gap: var(--s-3); min-width:200px;">
+            <strong style="font-size:11px; letter-spacing:.14em; color:var(--concreto-stone-500); text-transform:uppercase;">Sidebar</strong>
+            <div style="background:white; padding: 10px 14px; border-radius: var(--r-sm); border:1px solid var(--concreto-mist); font-size:13px;">Criar Operação</div>
+            <div style="background:var(--concreto-navy); color:white; padding: 10px 14px; border-radius: var(--r-sm); font-size:13px;">Listar Operações</div>
+            <div style="background:white; padding: 10px 14px; border-radius: var(--r-sm); border:1px solid var(--concreto-mist); font-size:13px;">Operação Imobiliária</div>
+            <div style="background:white; padding: 10px 14px; border-radius: var(--r-sm); border:1px solid var(--concreto-mist); font-size:13px;">Configurações</div>
+          </div>
+          <div>
+            <h3 class="h-card" style="margin-bottom:var(--s-3);">Hierarquia de navegação</h3>
+            <ol style="padding-left: 18px; color:var(--concreto-stone-700); font-size:14px; line-height:1.9;">
+              <li><strong>Topbar:</strong> módulos do produto (Escritório, Cotista, Cobrança, Operações, Custos, Financeiro, Relatórios, Fundos)</li>
+              <li><strong>Seletor de Fundo:</strong> contexto global persistente, alinhado à direita</li>
+              <li><strong>Sidebar:</strong> ações e visões dentro do módulo selecionado</li>
+              <li><strong>Breadcrumb:</strong> sempre visível no topo do workspace (<code>Operações › Listar</code>)</li>
+              <li><strong>Workspace:</strong> título da página + ações primárias à direita, depois conteúdo</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ===================== VOZ ===================== -->
+    <section class="section" id="voz">
+      <div class="section-head">
+        <span class="h-eyebrow">14 · Padrões</span>
+        <h2 class="h-section">Voz & Tom</h2>
+        <p class="h-sub">Concreto fala com a precisão de um back-office sênior: direta, técnica, sem floreios — mas sempre clara para quem está aprendendo o domínio.</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3 class="h-card" style="margin-bottom: var(--s-4); color: var(--status-success-fg);">✓ Faça</h3>
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:var(--s-3); font-size:14px; color:var(--concreto-graphite);">
+            <li>"Cadastrar Operação"</li>
+            <li>"Aguardando Pagamento"</li>
+            <li>"Revise as informações antes de finalizar"</li>
+            <li>"Fluxo unificado para criação de operações"</li>
+            <li>"Buscar por operação, sacado ou título"</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="h-card" style="margin-bottom: var(--s-4); color: var(--status-danger-fg);">✕ Evite</h3>
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:var(--s-3); font-size:14px; color:var(--concreto-graphite);">
+            <li>"Vamos lá! Crie sua operação 🚀"</li>
+            <li>"Pendente"</li>
+            <li>"Tem certeza absoluta que quer fazer isso?"</li>
+            <li>"Onboarding incrível pra você"</li>
+            <li>"Pesquise aqui o que você quiser"</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: var(--s-5);">
+        <h3 class="h-card" style="margin-bottom: var(--s-4);">Convenções de escrita</h3>
+        <dl class="def-grid">
+          <div class="def-item">
+            <dt>Valores monetários</dt>
+            <dd>R$ 5.887.405,00 <small style="font-weight:400; color:var(--concreto-stone-500);">— sempre com R$, ponto de milhar e duas casas</small></dd>
+          </div>
+          <div class="def-item">
+            <dt>Datas</dt>
+            <dd>14/04/2026 <small style="font-weight:400; color:var(--concreto-stone-500);">— DD/MM/AAAA</small></dd>
+          </div>
+          <div class="def-item">
+            <dt>IDs de operação</dt>
+            <dd>20260414a <small style="font-weight:400; color:var(--concreto-stone-500);">— display, peso semibold</small></dd>
+          </div>
+          <div class="def-item">
+            <dt>Códigos de contrato</dt>
+            <dd style="font-family:var(--font-mono);">CCB 53807851 <small style="font-weight:400; color:var(--concreto-stone-500); font-family:var(--font-body);">— mono, secundário</small></dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <div style="height: var(--s-11);"></div>
+
+    <footer style="border-top: 1px solid var(--concreto-mist); padding: var(--s-7) 0; color: var(--concreto-stone-500); font-size: 12px; display:flex; justify-content:space-between; align-items:center;">
+      <div>Concreto Design System · v1.0 · Maio 2026</div>
+      <div class="row">
+        <span class="tag">Sora</span>
+        <span class="tag">Inter</span>
+        <span class="tag">JetBrains Mono</span>
+      </div>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+  // Smooth highlight da sidebar conforme scroll
+  const links = document.querySelectorAll('.side-link');
+  const sections = [...document.querySelectorAll('section[id], div[id]')];
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(s => obs.observe(s));
+</script>
+
+</body>
+</html>
